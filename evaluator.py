@@ -8,7 +8,7 @@ for i in range(len(GRID)):
     GRID[i] = (i & 1) + GRID[i >> 1]
 
 def bin_conversion(card):
-    #Schema for binary representation of card - adaptation of Cactus Kev's/RadekJ
+    #Schema for binary representation of card - adaptation of Cactus Kev's/RadekJ's
 
     #---bbbbb bbbbbbbb --pppppp ssssvvvv
 
@@ -116,5 +116,3 @@ def check_flush(x):
 
 def count_bits(x):
     return GRID[x & 0xffff] + GRID[(x >> 16) & 0xffff]
-
-print(evaluate(['ac','9h','qc','jc','10c', '9d', '2h']))
