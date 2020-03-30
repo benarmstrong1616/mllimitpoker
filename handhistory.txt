@@ -1,0 +1,110 @@
+16/03/2020 20:15:21
+Hand1
+dealer raises to 4, BB calls 4
+BB checks Dealer checks 
+BB bets 4.0 Dealer calls 
+BB bets 8.0 Dealer raises to 16.0 BB folds, Dealer wins pot of 40.0
+Updated Counts: 16.0, -16.0
+Hand2
+Dealer calls 2, BB raises to 4, Dealer folds, BB wins pot of 6
+Updated Counts: 18.0, -18.0
+Hand3
+Dealer calls 2, BB checks
+BB bets 2.0 Dealer raises to 4.0 BB calls 
+BB bets 6.0 Dealer raises to 12.0 BB calls 
+BB bets 18.0 Dealer raises to 36.0 BB folds, Dealer wins pot of 90.0
+Updated Counts: 54.0, -54.0
+Hand4
+Dealer calls 2, BB raises to 4, Dealer folds, BB wins pot of 6
+Updated Counts: 56.0, -56.0
+Hand5
+dealer raises to 4, BB folds, dealer wins pot of 6
+Updated Counts: 58.0, -58.0
+End of session, Player1 wins16/03/2020 20:28:38
+Hand1
+Dealer calls 2, BB checks
+BB checks Dealer bets 2.0 BB folds, Dealer wins pot of 6.0
+Updated Counts: 2.0, -2.0
+Hand2
+dealer raises to 4, BB calls 4
+BB bets 4.0 Dealer folds, BB wins pot of 12.0
+Updated Counts: 6.0, -6.0
+Hand3
+Dealer calls 2, BB checks
+BB bets 2.0 Dealer raises to 4.0 BB folds, Dealer wins pot of 10.0
+Updated Counts: 10.0, -10.0
+Hand4
+Dealer folds, BB wins pot of 3
+Updated Counts: 11.0, -11.0
+Hand5
+16/03/2020 20:30:42
+Hand1
+Dealer calls 2, BB raises to 4, Dealer calls 4
+BB bets 4.0 Dealer raises to 8.0 BB folds, Dealer wins pot of 20.0
+Updated Counts: 8.0, -8.0
+Hand2
+Dealer folds, BB wins pot of 3
+Updated Counts: 9.0, -9.0
+Hand3
+16/03/2020 20:37:48
+Hand1
+Dealer calls 2, BB checks
+BB bets 2.0 Dealer raises to 4.0 BB folds, Dealer wins pot of 10.0
+Updated Counts: 4.0, -4.0
+Hand2
+dealer raises to 4, BB calls 4
+BB checks Dealer checks 
+BB checks Dealer checks 
+BB bets 4.0 Dealer calls 
+BB wins pot of 16 at showdown
+Updated Counts: 12.0, -12.0
+Hand3
+Dealer calls 2, BB raises to 4, Dealer calls 4
+BB checks Dealer bets 4.0 BB raises to 8.0 Dealer calls 
+BB bets 12.0 Dealer raises to 24.0 BB calls 
+BB checks Dealer checks 
+Dealer wins pot of 72 at showdown
+Updated Counts: 48.0, -48.0
+Hand4
+Dealer calls 2, BB checks
+BB bets 2.0 Dealer raises to 4.0 BB calls 
+BB bets 6.0 Dealer folds, BB wins pot of 18.0
+Updated Counts: 54.0, -54.0
+Hand5
+dealer raises to 4, BB calls 4
+BB bets 4.0 Dealer calls 
+BB bets 8.0 Dealer calls 
+BB bets 16.0 Dealer calls 
+Dealer wins pot of 64 at showdown
+Updated Counts: 86.0, -86.0
+End of session, Player1 wins17/03/2020 10:31:11
+Hand1
+Dealer calls 2, BB checks
+BB bets 2.0 Dealer raises to 4.0 BB calls 
+BB bets 6.0 Dealer calls 
+BB bets 12.0 Dealer folds, BB wins pot of 36.0
+Updated Counts: -12.0, 12.0
+Hand2
+dealer raises to 4, BB calls 4
+BB checks Dealer checks 
+BB checks Dealer checks 
+BB bets 4.0 Dealer folds, BB wins pot of 12.0
+Updated Counts: -8.0, 8.0
+Hand3
+dealer raises to 4, BB folds, dealer wins pot of 6
+Updated Counts: -6.0, 6.0
+Hand4
+dealer raises to 4, BB calls 4
+BB bets 4.0 Dealer calls 
+BB bets 8.0 Dealer raises to 16.0 BB calls 
+BB bets 24.0 Dealer calls 
+Draw at showdown pot of 96 is split
+Updated Counts: -6.0, 6.0
+Hand5
+Dealer calls 2, BB raises to 4, Dealer calls 4
+BB bets 4.0 Dealer calls 
+BB checks Dealer checks 
+BB bets 8.0 Dealer calls 
+Dealer wins pot of 32 at showdown
+Updated Counts: 10.0, -10.0
+End of session, Player1 wins
