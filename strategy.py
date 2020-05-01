@@ -45,15 +45,15 @@ class Strategy:
     #2 - Call
     #3 - Bet
     #4 - Raise
-    def __init__(self, strat_file=None):
+    def __init__(self, strat_file=None, load=True):
         self.textures = 8
         self.ranks = 9
         self.percentiles = 20
         self.rounds = 3
         self.decisions = 5
         self.strategy = None
-        self.strat_file = "strategy.pkl"
-        if strat_file:
+        self.strat_file = strat_file
+        if strat_file and load:
             self.strat_file = strat_file
             pickle_file = open(self.strat_file, 'rb')
             self.strategy = copy.deepcopy(pickle.load(pickle_file))
@@ -61,12 +61,8 @@ class Strategy:
         	self.strategy = self.initialise_strategy()
 
     def initialise_strategy(self):
-        shape = [self.textures, self.ranks, self.percentiles, self.rounds, self.decisions]
-        data = None
-        while len(shape) > 0:
-            data = [data for x in range(shape[-1])]
-            shape.pop()
-        return data
+        a = [ [ [ [ [ None for i in range(self.decisions) ] for j in range(self.rounds) ] for k in range(self.percentiles) ] for l in range(self.ranks) ] for m in range(self.textures) ]
+        return a
 
     def update_regret(self, texture, rank, percentile, round_idx, dec, regret):
         if self.strategy[texture][rank][percentile][round_idx][dec]:

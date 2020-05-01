@@ -193,9 +193,9 @@ def percentile(hc, board, rank):
         elif r == rank:
             beaten += 0.5
     if beaten/len(all_hands) == 1.0:
-        return 0.95
+        return 19
     else:
-        return math.floor((beaten/len(all_hands)) / 0.05)
+        return int(math.floor((beaten/len(all_hands)) / 0.05))
 
 
 def board_texture(board):

@@ -6,14 +6,14 @@ import random
 import copy
 
 class Game:
-    def __init__(self, player=False, history_file="handhistory.txt"):
+    def __init__(self, player=False, botload=False, botplayer="strategy0.pkl", botopp="strategy1.pkl"):
         self.players = [None, None]
         self.player = player
         if player:
             self.players[0] = Player()
         else:
-            self.players[0] = Bot(1)
-        self.players[1] = Bot(1)
+            self.players[0] = Bot(botplayer, botload)
+        self.players[1] = Bot(botopp, botload)
         self.deck = ['ac', 'as', 'ah', 'ad', 'kc', 'ks', 'kh', 'kd',
                      'qc', 'qs', 'qh', 'qd', 'jc', 'js', 'jh', 'jd',
                      '10c', '10s', '10h', '10d', '9c', '9s', '9h', '9d',
@@ -22,14 +22,10 @@ class Game:
                      '4c', '4s', '4h', '4d', '3c', '3s', '3h', '3d',
                      '2h', '2d', '2c', '2s']
         self.blinds = [1,2]
-        self.history_file = history_file
         self.counts = (0,0)
 
-    def start(self, hands=20):
-        hist_file = open(self.history_file, "a")
-        hist_file.write("{0}\n".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
+    def start(self, hands=20, hands_per_save=500):
         for x in range(hands):
-            hist_file.write("Hand{0}\n".format(x+1))
             if self.player:
                 print("\nHand{0}\n".format(x+1))
             hand_res = self.play_hand(x%2)
@@ -37,17 +33,29 @@ class Game:
                 num_res = [hand_res[1], hand_res[0]]
             else:
                 num_res = [hand_res[0], hand_res[1]]
+            if not self.player:
+                self.players[0].update_strategy(num_res[0])
+            self.players[1].update_strategy(num_res[1])
             self.counts = (self.counts[0]+num_res[0], self.counts[1]+num_res[1])
-            hist_file.write(hand_res[2])
-            hist_file.write("\nUpdated Counts: {0}, {1}\n".format(self.counts[0], self.counts[1]))
+            if x%hands_per_save == 0:
+                if not self.player:
+                    self.players[0].save_strategy()
+                self.players[1].save_strategy()
+                print("Successully saved strategies")
         if self.counts[0] > self.counts[1]:
             winner = "Player1"
         elif self.counts[1] > self.counts[0]:
             winner = "Player2"
         else:
             winner = "nobody"
-        hist_file.write("End of session, {0} wins".format(winner))
-        hist_file.close()
+        if not self.player:
+            self.players[0].save_strategy()
+        else:
+            print("Final counts are:")
+            print("Player: {0}".format(self.counts[0]))
+            print("Bot: {0}".format(self.counts[1]))
+            print("End of session, {0} wins".format(winner))
+        self.players[1].save_strategy()
 
     def play_hand(self, dealer=0):
         random.shuffle(self.deck)
@@ -130,6 +138,7 @@ class Game:
                 invested[1-player_idx] -= ((pot/2)*raises_made)
                 cur_pot += ((pot/2)*raises_made)
             move_count += 1
+        print(raises_made)
 
     def play_preflop(self, p1, p2, p1hc, p2hc, pot):
         info_string = ""
