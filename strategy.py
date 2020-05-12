@@ -61,6 +61,7 @@ class Strategy:
         	self.strategy = self.initialise_strategy()
 
     def initialise_strategy(self):
+        #create an empty 5-dimensional array with None values
         a = [ [ [ [ [ None for i in range(self.decisions) ] for j in range(self.rounds) ] for k in range(self.percentiles) ] for l in range(self.ranks) ] for m in range(self.textures) ]
         return a
 
@@ -80,6 +81,8 @@ class Strategy:
         return regrets
 
     def save_strategy(self):
+        #saving array to the pickle file
         output = open(self.strat_file, 'wb')
         pickle.dump(self.strategy, output)
+        #closing file after use to save system memory
         output.close()

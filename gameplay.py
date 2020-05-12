@@ -6,14 +6,17 @@ import random
 import copy
 
 class Game:
-    def __init__(self, player=False, botload=False, botplayer="strategy0.pkl", botopp="strategy1.pkl"):
+    def __init__(self, player=False, botload=False, botplayer="strategy0.pkl", botopp="strategy1.pkl", printres=False):
         self.players = [None, None]
+        #player is a true or false for whether a human is playing or not
         self.player = player
+        #players array filled with player and bot or 2 bots
         if player:
             self.players[0] = Player()
         else:
             self.players[0] = Bot(botplayer, botload)
         self.players[1] = Bot(botopp, botload)
+        #initialise deck
         self.deck = ['ac', 'as', 'ah', 'ad', 'kc', 'ks', 'kh', 'kd',
                      'qc', 'qs', 'qh', 'qd', 'jc', 'js', 'jh', 'jd',
                      '10c', '10s', '10h', '10d', '9c', '9s', '9h', '9d',
@@ -21,39 +24,51 @@ class Game:
                      '6c', '6s', '6h', '6d', '5c', '5s', '5h', '5d',
                      '4c', '4s', '4h', '4d', '3c', '3s', '3h', '3d',
                      '2h', '2d', '2c', '2s']
+        #defining the amounts for small and big blinds, could be changed for different game sizes
         self.blinds = [1,2]
+        #chip counts for both players
         self.counts = (0,0)
+        #helper boolean value for printing of self play results when gathering data
+        self.print_result = printres
 
     def start(self, hands=20, hands_per_save=500):
+        #loop round given number of hands
         for x in range(hands):
+            #only print hand numbers if there is a human player
             if self.player:
                 print("\nHand{0}\n".format(x+1))
+            #pass 0 or 1 to play_hand to denote current dealer, switching every hand
             hand_res = self.play_hand(x%2)
+            #store result depending on position which switches every hand
             if x%2 == 1:
                 num_res = [hand_res[1], hand_res[0]]
             else:
                 num_res = [hand_res[0], hand_res[1]]
+            #update strategies for any bots
             if not self.player:
                 self.players[0].update_strategy(num_res[0])
             self.players[1].update_strategy(num_res[1])
+            #update relevant counts
             self.counts = (self.counts[0]+num_res[0], self.counts[1]+num_res[1])
+            #save strategy every given number of hands
             if x%hands_per_save == 0:
                 if not self.player:
                     self.players[0].save_strategy()
                 self.players[1].save_strategy()
                 print("Successully saved strategies")
         if self.counts[0] > self.counts[1]:
-            winner = "Player1"
+            winner = "Agent1"
         elif self.counts[1] > self.counts[0]:
-            winner = "Player2"
+            winner = "Agent2"
         else:
             winner = "nobody"
         if not self.player:
             self.players[0].save_strategy()
-        else:
+        #only printing result if requested
+        if self.print_result:
             print("Final counts are:")
-            print("Player: {0}".format(self.counts[0]))
-            print("Bot: {0}".format(self.counts[1]))
+            print("Agent1: {0}".format(self.counts[0]))
+            print("Agent2: {0}".format(self.counts[1]))
             print("End of session, {0} wins".format(winner))
         self.players[1].save_strategy()
 
@@ -69,7 +84,9 @@ class Game:
         final_pot = 0
         rounds = ["PREFLOP", "FLOP", "TURN", "RIVER"]
         line = "-"*10
+        #play 4 rounds for the hand; preflop, flop, turn and river
         for x in range(4):
+            #print ------- ROUND -------- to distinguish between these for the player
             if self.player:
                 print(line,rounds[x],line)
             if x == 0:
@@ -78,6 +95,7 @@ class Game:
             else:
                 result = self.play_round(cur_dealer, cur_opp, dealer_hc, opp_hc, boardcards[0:(2+x)], result[0])
                 hand_string += "\n{0}".format(result[2])
+            #if there has been a result then end the hand and return the result
             if result[1]:
                 final_result = result[1]
                 break
@@ -86,10 +104,12 @@ class Game:
             final_result.append(hand_string)
             return final_result
         else:
+            #once all hands are complete and there is no winner then go to showdown
             showdown_res = self.showdown(dealer_hc, opp_hc, boardcards, final_pot, hand_string)
             return showdown_res
 
     def play_round(self, p1, p2, p1hc, p2hc, bc, pot):
+        #could trim variables down for decrease in time per hand
         cur_pot = pot
         invested = [-(pot/2), -(pot/2)]
         raises_made = 0

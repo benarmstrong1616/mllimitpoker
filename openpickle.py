@@ -2,6 +2,8 @@ import sys
 import pickle
 import copy
 
+#simple script used to check the contents of strategy files
+#script is also used to count the number of entries in the file that aren't None
 count_pickle = "n"
 file_name = sys.argv[1]
 if(len(sys.argv) > 2):
